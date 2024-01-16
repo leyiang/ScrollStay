@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "Scroll Stay",
+  "version": "1.0",
+  "description": "Scroll Stay is a Chrome extension designed to maintain the page scroll position during window resizing.",
+  "content_scripts": [
+      {
+          "matches": ["<all_urls>"],
+          "js": ["src/content.js"]
+      }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "options_page": "src/options/options.html"
+}
