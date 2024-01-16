@@ -1,7 +1,1 @@
-# hyde
-When you pause a YouTube video, the player controls don't disappear. That makes it really hard to take a clean screenshot of the video. The controls also block your view, which can get really annoying.
-
-Hyde is a simple Chrome extension that allows you to hide or show the video player controls easily. Simply use the keyboard shortcut Ctrl+M to hide the controls or show them again.
-
-![alt text](https://github.com/karmdesai/hyde/blob/master/img/beforeHyde.png?raw=true)
-![alt text](https://github.com/karmdesai/hyde/blob/master/img/afterHyde.png?raw=true)
+Scroll Stay is a Chrome extension designed to maintain the page scroll position during window resizing. This feature aims to address the issue in i3wm where you may be reading a tutorial and have a terminal open. When the browser size changes, the content you were viewing may shift unexpectedly due to the static scroll top. Scroll Stay prevents such disruptions by preserving the scroll position.
