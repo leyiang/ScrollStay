@@ -15,6 +15,26 @@ chrome.storage.sync.get(["ScrollStayRules"], items => {
 
         document.body.appendChild( anchorMark );
 
+        function isElementInViewport (el) {
+            let top = el.offsetTop;
+            let width = el.offsetWidth;
+            let height = el.offsetHeight;
+            let left = el.offsetLeft;
+
+            while(el.offsetParent) {
+                el = el.offsetParent;
+                top += el.offsetTop;
+                left += el.offsetLeft;
+            }
+
+            return (
+                top < (window.pageYOffset + window.innerHeight) &&
+                left < (window.pageXOffset + window.innerWidth) &&
+                (top + height) > window.pageYOffset &&
+                (left + width) > window.pageXOffset
+            );
+        }
+
         function updateMark() {
             if( anchor ) {
                 const rect = anchor.getBoundingClientRect();
@@ -47,8 +67,35 @@ chrome.storage.sync.get(["ScrollStayRules"], items => {
             updateMark();
         });
 
+        function getNextAnchor( el ) {
+            if( ! el ) return;
+
+            let newAnchor = el.nextElementSibling;
+
+            if( ! newAnchor ) {
+                const parNode = el.parentNode;
+
+                if( parNode.nextElementSibling?.firstElementChild ) {
+                    anchor = parNode.nextElementSibling?.firstElementChild;
+                } else {
+                    getNextAnchor( parNode );
+                }
+            } else {
+                anchor = newAnchor;
+            }
+        }
+
         window.addEventListener("scroll", e => {
+            if( anchor ) {
+
+                // Scroll Out View
+                if( ! isElementInViewport(anchor) ) {
+                    getNextAnchor( anchor );
+                }
+            }
             updateMark();
+
+
         });
     }
 });
