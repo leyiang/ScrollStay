@@ -33,8 +33,13 @@ chrome.storage.sync.get(["ScrollStayRules"], items => {
 
 
         window.addEventListener("mousedown", e => {
-            anchor = e.target;
-            updateMark();
+            if( e.ctrlKey ) {
+                anchor = e.target;
+                updateMark();
+            } else if( e.altKey ) {
+                anchor = null;
+                updateMark();
+            }
         });
 
         window.addEventListener("resize", e => {
