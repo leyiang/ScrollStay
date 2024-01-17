@@ -28,7 +28,7 @@ function createRuleDOM(config) {
 }
 
 chrome.storage.sync.get(["ScrollStayRules"], items => {
-    ScrollStayRules = items.ScrollStayRules;
+    ScrollStayRules = items.ScrollStayRules ?? [];
 
     ScrollStayRules.forEach( url => {
         const formDOM = createRuleDOM({url});
