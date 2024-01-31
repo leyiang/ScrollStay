@@ -11,6 +11,7 @@ chrome.storage.sync.get(["ScrollStayRules"], items => {
             opacity: .3;
             pointer-events: none;
             display: none;
+            transition: opacity .3s;
         `;
 
         document.body.appendChild( anchorMark );
@@ -57,8 +58,17 @@ chrome.storage.sync.get(["ScrollStayRules"], items => {
                 anchor = e.target;
                 updateMark();
             } else if( e.altKey ) {
-                anchor = null;
-                updateMark();
+                let opacity = Number(anchorMark.style.opacity);
+
+                if( opacity === 0 ) {
+                    opacity = .3
+                } else {
+                    opacity = 0;
+                }
+
+                anchorMark.style.opacity = opacity;
+                // anchor = null;
+                // updateMark();
             }
         });
 
